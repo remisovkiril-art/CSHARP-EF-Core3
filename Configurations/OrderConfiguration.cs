@@ -2,8 +2,9 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using ShopPV521.Entities;
 
-namespace ShopPV521.Configurations {
-public class OrderConfiguration : IEntityTypeConfiguration<Order>
+namespace ShopPV521.Configurations
+{
+    public class OrderConfiguration : IEntityTypeConfiguration<Order>
     {
         public void Configure(EntityTypeBuilder<Order> builder)
         {
@@ -16,6 +17,14 @@ public class OrderConfiguration : IEntityTypeConfiguration<Order>
 
             builder.Property(o => o.OrderDate)
                 .HasDefaultValueSql("GETDATE()");
+
+            builder.Property(o => o.Status)
+                .IsRequired()
+                .HasMaxLength(50);
+
+            builder.HasOne(o => o.User)
+                .WithMany(u => u.Orders)
+                .HasForeignKey(o => o.UserId);
         }
     }
 }
