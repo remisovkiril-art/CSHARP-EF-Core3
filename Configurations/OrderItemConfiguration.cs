@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using ShopPV521.Entities;
-
 namespace ShopPV521.Configurations
 {
     public class OrderItemConfiguration : IEntityTypeConfiguration<OrderItem>

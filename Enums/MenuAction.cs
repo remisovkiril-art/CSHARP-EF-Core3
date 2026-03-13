@@ -1,10 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ShopApp.Enums
+﻿namespace ShopPV521.Enums
 {
-    internal class MenuAction
+    public enum MenuAction
     {
+        CreateProduct = 1,
+        ShowProducts,
+        UpdatePrice,
+        DeleteProduct,
+        Exit
     }
 }
