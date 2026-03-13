@@ -16,7 +16,7 @@ namespace ShopPV521.Managers
         {
             while (true)
             {
-                Console.WriteLine("\n0 - Create category
+                Console.WriteLine("\n0 - Create category");
                 Console.WriteLine("1 - Create product");
                 Console.WriteLine("2 - Show products");
                 Console.WriteLine("3 - Update price");
