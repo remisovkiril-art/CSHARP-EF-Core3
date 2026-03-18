@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using ShopPV521.Entities;
+
 namespace ShopPV521.Configurations
 {
     public class OrderItemConfiguration : IEntityTypeConfiguration<OrderItem>
@@ -15,7 +16,7 @@ namespace ShopPV521.Configurations
                 .HasColumnType("decimal(18,2)");
 
             builder.HasOne(o => o.Product)
-                .WithMany()
+                .WithMany(p => p.OrderItems)
                 .HasForeignKey(o => o.ProductId)
                 .OnDelete(DeleteBehavior.Restrict);
         }

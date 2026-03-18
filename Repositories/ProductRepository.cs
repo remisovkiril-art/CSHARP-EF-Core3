@@ -19,7 +19,6 @@ namespace ShopPV521.Repositories
             _db.SaveChanges();
         }
 
-
         public void CreateCategory(Category category)
         {
             _db.Categories.Add(category);
@@ -36,6 +35,12 @@ namespace ShopPV521.Repositories
             return _db.Products
                 .AsNoTracking()
                 .ToList();
+        }
+
+        public Product FindByName(string name)
+        {
+            return _db.Products
+                .FirstOrDefault(p => p.Name == name);
         }
 
         public void UpdatePrice(int id, decimal newPrice)

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ShopPV521.Context;
 
@@ -11,9 +12,11 @@ using ShopPV521.Context;
 namespace ShopApp.Migrations
 {
     [DbContext(typeof(ShopDbContext))]
-    partial class ShopDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260318163236_AddProductNameIndex")]
+    partial class AddProductNameIndex
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -96,6 +99,9 @@ namespace ShopApp.Migrations
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("ProductId1")
+                        .HasColumnType("int");
+
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
@@ -104,6 +110,8 @@ namespace ShopApp.Migrations
                     b.HasIndex("OrderId");
 
                     b.HasIndex("ProductId");
+
+                    b.HasIndex("ProductId1");
 
                     b.ToTable("OrderItems", (string)null);
                 });
@@ -140,8 +148,6 @@ namespace ShopApp.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
-
-                    b.HasIndex("Name");
 
                     b.ToTable("Products", (string)null);
                 });
@@ -210,10 +216,14 @@ namespace ShopApp.Migrations
                         .IsRequired();
 
                     b.HasOne("ShopPV521.Entities.Product", "Product")
-                        .WithMany("OrderItems")
+                        .WithMany()
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.HasOne("ShopPV521.Entities.Product", null)
+                        .WithMany("OrderItems")
+                        .HasForeignKey("ProductId1");
 
                     b.Navigation("Order");
 
